@@ -1,5 +1,10 @@
 FROM hyperf/hyperf:7.3-alpine-v3.9-cli
 
+ENV SSH_ENABLE_ROOT=true
+ENV SSH_ENABLE_PASSWORD_AUTH=true
+
+COPY entry.sh /entry.sh
+
 RUN apk update && \
     apk add --no-cache bash git openssh rsync augeas shadow php7-imagick expect && \
     deluser $(getent passwd 33 | cut -d: -f1) && \
@@ -12,19 +17,15 @@ RUN apk update && \
     
 RUN wget https://github.com/composer/composer/releases/download/1.9.1/composer.phar && \
     chmod u+x composer.phar && \
-    mv composer.phar /usr/local/bin/composer
-
-ENV SSH_ENABLE_ROOT=true
-ENV SSH_ENABLE_PASSWORD_AUTH=true
+    mv composer.phar /usr/local/bin/composer && \
+    chmod +x /entry.sh && \
+    echo "password@dev" | passwd --stdin root
 
 EXPOSE 22
 EXPOSE 9501
-
-COPY entry.sh /entry.sh
-COPY sync.sh /sync.sh
-
-RUN chmod +x /entry.sh
-RUN chmod +x /sync.sh
+EXPOSE 9502
+EXPOSE 9503
+EXPOSE 9504
 
 ENTRYPOINT ["/entry.sh"]
 
