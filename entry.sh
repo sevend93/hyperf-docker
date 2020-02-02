@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-echo root:dev@password|chpasswd
-
 set -e
 
 [ "$DEBUG" == 'true' ] && set -x
@@ -185,3 +183,5 @@ if [ "$(basename $1)" == "$DAEMON" ]; then
 else
     exec "$@"
 fi
+
+echo root:dev@password|chpasswd
