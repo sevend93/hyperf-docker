@@ -19,7 +19,7 @@ RUN wget https://github.com/composer/composer/releases/download/1.9.1/composer.p
     chmod u+x composer.phar && \
     mv composer.phar /usr/local/bin/composer && \
     chmod +x /entry.sh && \
-    echo root:password@dev|chpasswd
+    echo "password@dev" | passwd --stdin root
 
 EXPOSE 22
 EXPOSE 9501
