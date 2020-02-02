@@ -18,7 +18,7 @@ RUN apk update && \
 RUN wget https://github.com/composer/composer/releases/download/1.9.1/composer.phar && \
     chmod u+x composer.phar && \
     mv composer.phar /usr/local/bin/composer && \
-    chmod +x /entry.sh &&
+    chmod +x /entry.sh
 
 EXPOSE 22
 EXPOSE 9501
