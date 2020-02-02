@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo root:dev@password|chpasswd
+
 set -e
 
 [ "$DEBUG" == 'true' ] && set -x
