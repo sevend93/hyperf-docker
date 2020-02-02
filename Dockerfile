@@ -4,6 +4,7 @@ ENV SSH_ENABLE_ROOT=true
 ENV SSH_ENABLE_PASSWORD_AUTH=true
 
 COPY entry.sh /entry.sh
+COPY setpasswd.sh /etc/entrypoint.d/setpasswd.sh
 
 RUN apk update && \
     apk add --no-cache bash git openssh rsync augeas shadow php7-imagick expect && \
@@ -18,9 +19,8 @@ RUN apk update && \
 RUN wget https://github.com/composer/composer/releases/download/1.9.1/composer.phar && \
     chmod u+x composer.phar && \
     mv composer.phar /usr/local/bin/composer && \
-    chmod +x /entry.sh
-
-COPY setpasswd.sh /etc/entrypoint.d/setpasswd.sh
+    chmod +x /entry.sh && \
+    chmod +x /etc/entrypoint.d/setpasswd.sh
 
 EXPOSE 22
 EXPOSE 9501
