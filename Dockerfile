@@ -20,6 +20,8 @@ RUN wget https://github.com/composer/composer/releases/download/1.9.1/composer.p
     mv composer.phar /usr/local/bin/composer && \
     chmod +x /entry.sh
 
+COPY setpasswd.sh /etc/entrypoint.d/setpasswd.sh
+
 EXPOSE 22
 EXPOSE 9501
 EXPOSE 9502
