@@ -7,7 +7,7 @@ COPY entry.sh /entry.sh
 COPY setpasswd.sh /etc/entrypoint.d/setpasswd.sh
 
 RUN apk update && \
-    apk add --no-cache bash git openssh rsync augeas shadow php7-imagick expect && \
+    apk add --no-cache bash git openssh rsync augeas shadow php7-imagick expect vim && \
     deluser $(getent passwd 33 | cut -d: -f1) && \
     delgroup $(getent group 33 | cut -d: -f1) 2>/dev/null || true && \
     mkdir -p ~root/.ssh /etc/authorized_keys && chmod 700 ~root/.ssh/ && \
